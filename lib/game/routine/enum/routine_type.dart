@@ -1,0 +1,1 @@
+enum RoutineType { collectScrap }

@@ -1,0 +1,1 @@
+enum SupplyState { locked, unlocked }

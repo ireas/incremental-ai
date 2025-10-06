@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incremental_ai/game/supply/enum/supply_state.dart';
 import 'package:incremental_ai/game/supply/model/supply_model.dart';
 import 'package:watch_it/watch_it.dart';
 
@@ -11,7 +12,7 @@ class SupplyBar extends WatchingWidget {
   Widget build(BuildContext context) {
     SupplyModel current = watch<SupplyModel>(model);
 
-    if (!current.enabled) {
+    if (current.state == SupplyState.locked) {
       return SizedBox(height: 0);
     }
 
