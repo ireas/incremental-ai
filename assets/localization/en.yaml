@@ -1,0 +1,4 @@
+quest:
+  a:
+    name: "Questname"
+    description: "Collect {VALUE} or more"
