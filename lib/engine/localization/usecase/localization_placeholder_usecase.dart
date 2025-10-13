@@ -11,7 +11,7 @@ class LocalizationPlaceholderUsecase {
 
   /// Replaces the placeholders in [raw] String by injecting the [replacements].
   /// The placeholders in [raw] must match the keys in [replacements] and must be contained in curly brackets.
-  /// There can not be more placeholders than placeholder values nor vice versa.
+  /// There should not be more replacements values than placeholder.
   ///
   /// Example:
   /// The placeholder "{targetValue}" in [raw] would be replaced by the [replacements] entry with key "targetValue".
@@ -28,11 +28,6 @@ class LocalizationPlaceholderUsecase {
 
       _logger.t("Replace ${replacement.key} with ${replacement.value} in $refined");
       refined = refined.replaceAll(RegExp("{${replacement.key}}", caseSensitive: false), replacement.value);
-    }
-
-    // check if any placeholders were not replaced
-    if (refined.contains(_placeholderRegex)) {
-      _logger.w("Not all placeholders were replaced: $refined");
     }
 
     // return replaced string

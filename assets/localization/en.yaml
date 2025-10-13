@@ -1,4 +1,11 @@
 quest:
-  a:
-    name: "Questname"
-    description: "Collect {VALUE} or more"
+  tutorial:
+    collect_scrap:
+      name: "Collect Scrap"
+    collect_scrap_after:
+      name: "Collect More Scrap"
+objective:
+  collect_supply:
+    label: "Collect {supply}: ({current_value}/{target_value})"
+  reach_routine_level:
+    label: "Reach {routine} Level: ({current_level}/{target_level})"

@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:incremental_ai/engine/module/assembly.dart';
 import 'package:incremental_ai/engine/module/module_assembler.dart';
 import 'package:incremental_ai/game/supply/supply_repository.dart';
+import 'package:incremental_ai/game/supply/usecase/supply_inspect_usecase.dart';
 import 'package:incremental_ai/game/supply/usecase/supply_modify_usecase.dart';
 
 class SupplyAssembler extends ModuleAssembler {
@@ -15,5 +16,6 @@ class SupplyAssembler extends ModuleAssembler {
 
     // usecases
     GetIt.I.registerSingleton<SupplyModifyUsecase>(SupplyModifyUsecase(repository));
+    GetIt.I.registerSingleton<SupplyInspectUsecase>(SupplyInspectUsecase(repository));
   }
 }
