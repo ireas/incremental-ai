@@ -1,4 +1,11 @@
 quest:
-  a:
-    name: "Aufgabenname"
-    description: "beschreibung"
+  tutorial:
+    collect_scrap:
+      name: "Sammel Schrott"
+    collect_scrap_after:
+      name: "Sammel Mehr Schrott"
+objective:
+  collect_supply:
+    label: "Sammle {current_value}: ({value}/{target_value})"
+  reach_routine_level:
+    label: "Erreiche {routine} Stufe: ({current_level}/{target_level})"

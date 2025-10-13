@@ -12,9 +12,8 @@ class LocalizationTranslateUsecase {
   LocalizationTranslateUsecase(this.repository);
 
   /// Translates a technical lookup [key] to its currently active language.
-  /// If any [replacements] are given, also replaces the placeholders in String.
-  /// If translation lookup fails, return key
-  String translate(String key, {Map<String, String>? replacements}) {
+  /// If translation lookup fails, returns lookup [key]
+  String translate(String key) {
     _logger.t("Translating $key");
 
     // fetch currently active localization
@@ -29,11 +28,28 @@ class LocalizationTranslateUsecase {
       return key;
     }
 
-    // replace placeholders if there are any
-    translation = GetIt.I<LocalizationPlaceholderUsecase>().replacePlaceholders(translation, replacements ?? {});
-
     // return translated string
     _logger.t("Translated $key to $translation");
     return translation;
+  }
+
+  /// Translates a technical lookup [key] via [translate] and replaces placeholders with values in [replacements].
+  /// If translation lookup fails, returns lookup [key]
+  String translateAndReplace(String key, Map<String, String> replacements) {
+    // try translating
+    String raw = translate(key);
+
+    // if translating fails, return raw key
+    if (raw == key) {
+      return key;
+    }
+
+    // replace placeholders if there are any
+    _logger.t("Refining $raw");
+    String refined = GetIt.I<LocalizationPlaceholderUsecase>().replacePlaceholders(raw, replacements);
+
+    // return refined string
+    _logger.t("Translated $key to $refined");
+    return refined;
   }
 }
