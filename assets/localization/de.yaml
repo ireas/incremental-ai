@@ -1,3 +1,10 @@
+routine:
+  processor:
+    name: "Prozessor"
+  routine:
+    collect_scrap:
+     name: "Schrottdrohnen"
+     tooltip: "Schicke Drohnen los um Schrott zu sammeln."
 quest:
   tutorial:
     collect_scrap:
