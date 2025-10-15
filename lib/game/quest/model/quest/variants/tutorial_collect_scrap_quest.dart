@@ -5,9 +5,9 @@ import 'package:incremental_ai/game/quest/model/objective/variants/reach_routine
 import 'package:incremental_ai/game/quest/model/quest/quest_model.dart';
 import 'package:incremental_ai/game/quest/model/quest/variants/tutorial_after_collect_scrap_quest.dart';
 import 'package:incremental_ai/game/quest/quest_repository.dart';
-import 'package:incremental_ai/game/routine/enum/routine_type.dart';
-import 'package:incremental_ai/game/routine/model/routine_model.dart';
-import 'package:incremental_ai/game/routine/usecase/routine_modify_usecase.dart';
+import 'package:incremental_ai/game/routine/action/routine_state_actions.dart';
+import 'package:incremental_ai/game/routine/model/routine/routine_model.dart';
+import 'package:incremental_ai/game/routine/model/routine/variant/collect_scrap_routine.dart';
 import 'package:incremental_ai/game/supply/enum/supply_type.dart';
 import 'package:incremental_ai/game/supply/model/supply_model.dart';
 import 'package:incremental_ai/game/supply/usecase/supply_modify_usecase.dart';
@@ -18,7 +18,7 @@ class TutorialCollectScrapQuest extends QuestModel {
   // source
   static const String sourceId = "quest.tutorial.collect_scrap";
   static final Set<ObjectiveModel> sourceObjectives = {
-    ReachRoutineLevelObjective(RoutineType.collectScrap, 1),
+    ReachRoutineLevelObjective(CollectScrapRoutine.sourceId, 1),
     CollectSupplyObjective(SupplyType.scrap, 1.0),
   };
 
@@ -29,7 +29,7 @@ class TutorialCollectScrapQuest extends QuestModel {
   @override
   void onActivation() {
     GetIt.I<SupplyModifyUsecase>().enable(SupplyType.scrap);
-    GetIt.I<RoutineModifyUsecase>().enable(RoutineType.collectScrap);
+    RoutineStateActions.instance.enable(CollectScrapRoutine.sourceId);
   }
 
   /// Trigger next quest.

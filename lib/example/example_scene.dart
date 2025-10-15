@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:incremental_ai/game/quest/ui/quest_overview.dart';
+import 'package:incremental_ai/game/routine/ui/processor_display.dart';
 import 'package:incremental_ai/game/routine/ui/routine_buttons.dart';
 import 'package:incremental_ai/game/supply/ui/supply_bars.dart';
 
@@ -14,11 +15,11 @@ class ExampleScene extends StatelessWidget {
       child: Row(
         children: [
           Expanded(flex: 2, child: Container(child: SupplyBars())),
+          Expanded(flex: 5, child: Column(children: [RoutineButtons(), ProcessorDisplay()])),
           Expanded(
-            flex: 5,
-            child: Column(children: [RoutineButtons()]),
+            flex: 2,
+            child: Align(alignment: AlignmentGeometry.topCenter, child: QuestOverview()),
           ),
-          Expanded(flex: 2, child: Align(alignment: AlignmentGeometry.topCenter, child: QuestOverview())),
         ],
       ),
     );

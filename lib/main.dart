@@ -5,6 +5,7 @@ import 'package:incremental_ai/engine/module/assembly.dart';
 import 'package:incremental_ai/example/example_scene.dart';
 import 'package:incremental_ai/game/quest/model/quest/variants/tutorial_collect_scrap_quest.dart';
 import 'package:incremental_ai/game/quest/quest_repository.dart';
+import 'package:incremental_ai/game/routine/action/routine_processor_actions.dart';
 import 'package:logger/logger.dart';
 
 /// Main application entry point
@@ -21,11 +22,12 @@ Future<void> main() async {
 
   // TODO: MOVE THIS TO A SEPARATE FILE FOR INITIAL GAME STARTS WITHOUT LOADING GAME SAVE
   GetIt.I<QuestRepository>().fetch(TutorialCollectScrapQuest.sourceId)?.activate();
+  RoutineProcessorActions.instance.addProcessorCapacity(2);
 
   runApp(MyApp());
 }
 
-// TODO: MOVE THIS TO SEPARATE ENGINE CLASS FOR RAPPING THE GAME
+// TODO: MOVE THIS TO SEPARATE ENGINE CLASS FOR WRAPPING THE GAME
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
