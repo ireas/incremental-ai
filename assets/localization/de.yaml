@@ -2,7 +2,7 @@ routine:
   processor:
     name: "Prozessor"
   routine:
-    collect_scrap:
+    scrapDrones:
       name: "Schrottdrohnen"
       tooltip: "Schicke Drohnen los um Schrott zu sammeln."
 upgrade:
@@ -13,11 +13,10 @@ upgrade:
     name: "Multu Schrott Kapazität"
     tooltip: "Erhöht Schrott Kapazität"
 quest:
-  tutorial:
-    collect_scrap:
-      name: "Sammel Schrott"
-    collect_scrap_after:
-      name: "Sammel Mehr Schrott"
+  tutorialOne:
+    name: "Sammel Schrott"
+  tutorialTwo:
+    name: "Sammel Mehr Schrott"
 objective:
   collect_supply:
     label: "Sammle {current_value}: ({value}/{target_value})"

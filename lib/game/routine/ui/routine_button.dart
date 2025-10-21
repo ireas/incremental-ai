@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
 import 'package:incremental_ai/engine/ui/widget/multi_click_button.dart';
 import 'package:incremental_ai/game/routine/action/routine_level_actions.dart';
-import 'package:incremental_ai/game/routine/model/enum/routine_state.dart';
-import 'package:incremental_ai/game/routine/model/routine/routine_model.dart';
+import 'package:incremental_ai/game/routine/model/routine/base/routine_model.dart';
+import 'package:incremental_ai/game/routine/model/routine/routine_type.dart';
+import 'package:incremental_ai/game/routine/routine_repository.dart';
 import 'package:watch_it/watch_it.dart';
 
 /// UI widget for displaying a single routine in UI.
@@ -15,32 +16,27 @@ import 'package:watch_it/watch_it.dart';
 /// - processing cost per activation
 class RoutineButton extends WatchingWidget {
   /// Source routine model.
-  final RoutineModel model;
+  final RoutineType type;
 
   /// Constructor.
-  const RoutineButton({super.key, required this.model});
+  const RoutineButton({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
-    // watch source model
-    RoutineModel current = watch<RoutineModel>(model);
-
-    // do not show any widget if routine is not active
-    if (current.state != RoutineState.unlocked) {
-      return SizedBox(height: 0, width: 0);
-    }
+    // watch model
+    RoutineModel routine = watch<RoutineModel>(RoutineRepository.instance.fetch(type));
 
     // fetch all strings
     // TODO: make static strings load once in constructor instead of each rebuild since they do not change anyway.
-    String name = GetIt.I<LocalizationTranslateUsecase>().translate("routine.${current.id}.name");
+    String name = GetIt.I<LocalizationTranslateUsecase>().translate("routine.${routine.id}.name");
     String processorName = GetIt.I<LocalizationTranslateUsecase>().translate("routine.processor.name");
-    String cost = "(${current.processingCost} $processorName)";
-    String tooltip = GetIt.I<LocalizationTranslateUsecase>().translate("routine.${current.id}.tooltip");
+    String cost = "(${routine.processingCost} $processorName)";
+    String tooltip = GetIt.I<LocalizationTranslateUsecase>().translate("routine.${routine.id}.tooltip");
 
     // create button that listens to left and right clicks and can show a tooltip
     return MultiClickButton(
-      onLeftClick: () => GetIt.I<RoutineLevelActions>().increment(current.id),
-      onRightClick: () => GetIt.I<RoutineLevelActions>().decrement(current.id),
+      onLeftClick: () => GetIt.I<RoutineLevelActions>().increment(type),
+      onRightClick: () => GetIt.I<RoutineLevelActions>().decrement(type),
       child: SizedBox(
         height: 100,
         width: 100,
@@ -52,7 +48,7 @@ class RoutineButton extends WatchingWidget {
             child: Column(
               children: [
                 Expanded(child: Text(name)),
-                Text("${current.level}"),
+                Text("${routine.level}"),
                 Text(cost),
               ],
             ),

@@ -2,8 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:incremental_ai/engine/localization/usecase/localization_placeholder_usecase.dart';
 import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
 import 'package:incremental_ai/game/quest/model/objective/objective_model.dart';
-import 'package:incremental_ai/game/supply/enum/supply_type.dart';
-import 'package:incremental_ai/game/supply/usecase/supply_inspect_usecase.dart';
+import 'package:incremental_ai/game/supply/action/supply_amount_actions.dart';
+import 'package:incremental_ai/game/supply/model/supply/supply_type.dart';
 
 /// Objective that requires the player to collect a required amount of a specified supply.
 class CollectSupplyObjective extends ObjectiveModel {
@@ -27,7 +27,7 @@ class CollectSupplyObjective extends ObjectiveModel {
   /// Completes if [_targetSupply] has value of at least [_targetValue].
   @override
   bool isCompleted() {
-    _currentValue = GetIt.I<SupplyInspectUsecase>().value(_targetSupply);
+    _currentValue = SupplyAmountActions.instance.inspect(_targetSupply);
     return _currentValue >= _targetValue;
   }
 

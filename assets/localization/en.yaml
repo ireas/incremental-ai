@@ -2,7 +2,7 @@ routine:
   processor:
     name: "Processors"
   routine:
-    collect_scrap:
+    scrapDrones:
       name: "Scrapdrones"
       tooltip: "Send drones to collect scrap."
 upgrade:
@@ -13,11 +13,10 @@ upgrade:
     name: "Increase Multi Scrap Capacity"
     tooltip: "Increases Scrap Capacity"
 quest:
-  tutorial:
-    collect_scrap:
-      name: "Collect Scrap"
-    collect_scrap_after:
-      name: "Collect More Scrap"
+  tutorialOne:
+    name: "Collect Scrap"
+  tutorialTwo:
+    name: "Collect More Scrap"
 objective:
   collect_supply:
     label: "Collect {supply}: ({current_value}/{target_value})"

@@ -15,18 +15,17 @@ Overview of internally used namings, to make them consistent.
   like a game loop but done not add any content.
 - **game**: Everything that includes content for this game should be part of the game directory.
 - **module**: I mostly self-contained part of the game. Each module should consistent of logic, data and UI elements. Each module has an own
-  folder. When deleting a folder, only dependent modules are allowed to break.
+  folder.
 - **common**: Everything that is shared across multiple modules should be part of the shared directory.
 
 ### Module Classes
 
 - **assembler**: entry point for a module that initially constructs and wires all *model*, *repository* and *usecase* classes, unavailable
   after assembly is complete.
-- **repository**: singleton class that instantiates *models*, available via *get_it* instance.
+- **repository**: singleton class that instantiates *models*
 - **model**: mutable data class that can be listened to by the UI. Gets created and hold by a *repository*. Acts as the single source of
-  truth for the model, available via *repositoy*.
-  *repository*.
-    - abstract base models should contain all common logic and extendable hook methods.
-    - concrete variant models implement logic overrides for specific implementations used in the game
-- **action**: singleton class that holds actions and aggregated logic for specific use cases. Instantiate by *assembler* and called by any
-  component, served via *get_it* instance.
+  truth for the model.
+    - _abstract base_ models should contain all common logic and extendable hook methods.
+    - _concrete variant_ models implement logic overrides for specific implementations used in the game
+- **actions**: singleton class that holds actions and aggregated logic for specific use cases. Instantiate by *assembler* and called by any
+  component.

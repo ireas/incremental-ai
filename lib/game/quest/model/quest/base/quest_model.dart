@@ -4,12 +4,15 @@ import 'package:incremental_ai/engine/localization/usecase/localization_translat
 import 'package:incremental_ai/game/quest/model/objective/objective_model.dart';
 import 'package:incremental_ai/game/quest/model/objective/objective_state.dart';
 import 'package:incremental_ai/game/quest/model/quest/quest_state.dart';
+import 'package:incremental_ai/game/quest/model/quest/quest_type.dart';
 
 /// Models a single quest the player is tasked. Consists of one or more [ObjectiveModel].
 abstract class QuestModel extends ChangeNotifier {
   // source
-  final String id;
+  late final String id;
   final Set<ObjectiveModel> objectives;
+
+  final QuestType type;
 
   // state
   QuestState _state = QuestState.inactive;
@@ -21,7 +24,8 @@ abstract class QuestModel extends ChangeNotifier {
 
   /// Constructor.
   /// Automatically builds [labelName] from [id].
-  QuestModel(this.id, this.objectives) {
+  QuestModel({required this.type, required this.objectives}) {
+    id = "quest.${type.name}";
     labelName = GetIt.I<LocalizationTranslateUsecase>().translate("$id.name");
   }
 
@@ -78,6 +82,7 @@ abstract class QuestModel extends ChangeNotifier {
     _state = QuestState.active;
     onActivation();
   }
+
   /// Is called on activation and can trigger any requirements.
   void onActivation();
 

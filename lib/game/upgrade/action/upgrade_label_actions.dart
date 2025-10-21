@@ -5,9 +5,9 @@ import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_type.dart';
 import 'package:incremental_ai/game/upgrade/upgrade_repository.dart';
 
 /// Action regarding upgrade labels.
-class UpgradeLabelAction extends ModuleUsecase {
+class UpgradeLabelActions extends ModuleActions {
   /// Singleton instance served by [GetIt].
-  static UpgradeLabelAction get instance => GetIt.I<UpgradeLabelAction>();
+  static UpgradeLabelActions get instance => GetIt.I<UpgradeLabelActions>();
 
   /// Returns the name label for upgrade specified by [type] parameter.
   /// For multi-purchase upgrade, add the current number of purchases to name.
@@ -32,7 +32,7 @@ class UpgradeLabelAction extends ModuleUsecase {
     return UpgradeRepository.instance
         .fetch(type)
         .fetchCurrentSupplyCosts()
-        .map((e) => "${e.amount} ${e.supply.name}")
+        .map((e) => "${e.amount} ${e.type.name}")
         .toList()
         .join(", ");
   }

@@ -5,18 +5,27 @@ import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_type.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/variant/scrap_capacity_upgrade.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/variant/scrap_multi_capacity_upgrade.dart';
 
-/// Repository class for Upgrade module.
+/// Repository for Upgrade module.
 class UpgradeRepository extends ModuleRepository {
-  /// Singleton served via GetIt.
+  /// Singleton served via [GetIt].
   static UpgradeRepository get instance => GetIt.I<UpgradeRepository>();
 
-  /// All upgrade models mapped by their type.
+  /// All models mapped by their type.
   final Map<UpgradeType, UpgradeModel> _models = {};
 
   @override
   Future<void> initializeModels() async {
     _models[UpgradeType.increaseScrapCapacity] = ScrapCapacityUpgrade();
     _models[UpgradeType.increaseMultiScrapCapacity] = ScrapMultiCapacityUpgrade();
+  }
+
+  @override
+  void validate() {
+    for (UpgradeType type in UpgradeType.values) {
+      if (!_models.containsKey(type)) {
+        logger.e("No model defined for $type");
+      }
+    }
   }
 
   @override
@@ -27,19 +36,8 @@ class UpgradeRepository extends ModuleRepository {
     notifyListeners();
   }
 
-  @override
-  void validate() {
-    for (UpgradeType type in UpgradeType.values) {
-      if (!_models.containsKey(type)) {
-        logger.e("No upgrade defined for $type");
-      }
-    }
-  }
-
   /// Fetches the model corresponding to [type] from [_models].
-  ///
-  /// There should be exactly one [UpgradeModel] per [UpgradeType].
-  /// Hence, if no model is put for type, throws [StateError].
+  /// If no model is defined for type, throws [StateError].
   UpgradeModel fetch(UpgradeType type) {
     return _models[type] ?? (throw StateError('No model found for $type'));
   }

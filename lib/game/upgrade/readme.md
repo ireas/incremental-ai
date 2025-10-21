@@ -1,11 +1,11 @@
 # Upgrade Module
 
-The `upgrade` module provides permanent improvement that the player can strive for. To purchase an upgrade, the player must pay certain
-amount of costs. 
+The **Upgrade** module provides permanent improvement that the player can strive for. To purchase an upgrade, the player must pay certain
+amount of costs.
 Upgrades are one of the main progression ways, especially in the early game.
 
 > [!NOTE]
-> Additional Ideas...
+> **Additional Ideas...**
 > - add images to upgrades UI
 > - add infinite upgrades where costs are non-constant
 

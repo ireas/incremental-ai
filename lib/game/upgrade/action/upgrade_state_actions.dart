@@ -4,9 +4,9 @@ import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_type.dart';
 import 'package:incremental_ai/game/upgrade/upgrade_repository.dart';
 
 /// Action regarding upgrade states.
-class UpgradeStateAction extends ModuleUsecase {
+class UpgradeStateActions extends ModuleActions {
   /// Singleton instance served by [GetIt].
-  static UpgradeStateAction get instance => GetIt.I<UpgradeStateAction>();
+  static UpgradeStateActions get instance => GetIt.I<UpgradeStateActions>();
 
   /// Unlocks the target upgrade identified by [type].
   void unlock(UpgradeType type) {
