@@ -9,6 +9,6 @@ class SupplyInspectUsecase extends ModuleUsecase {
 
   /// Fetches current value, targets model with set [type].
   double value(SupplyType type) {
-    return repository.fetch(type)?.value ?? 0.0;
+    return repository.fetch(type).value;
   }
 }

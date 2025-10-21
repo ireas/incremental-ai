@@ -23,7 +23,7 @@ class MultiClickButton extends StatelessWidget {
           }
         }
       },
-      child: TextButton(onPressed: () {}, child: child),
+      child: child,
     );
   }
 }

@@ -21,6 +21,9 @@ class QuestRepository extends ModuleRepository {
     }
   }
 
+  @override
+  void validate() {}
+
   /// Fetches a [QuestModel] that is identified by its [id].
   /// If no entry is found, returns [NULL].
   QuestModel? fetch(String id) {

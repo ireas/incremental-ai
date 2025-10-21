@@ -11,12 +11,12 @@ class SupplyModifyUsecase extends ModuleUsecase {
   /// Enables a supply model, targets model with set [type].
   void enable(SupplyType type) {
     logger.t("Enable: $type");
-    repository.fetch(type)?.state = SupplyState.unlocked;
+    repository.fetch(type).state = SupplyState.unlocked;
   }
 
   /// increases a models value by given input [value] parameter, targets model with set [type].
   void increaseValue(SupplyType type, double value) {
     logger.t("Increase Value: $type");
-    repository.fetch(type)?.value += value;
+    repository.fetch(type).value += value;
   }
 }

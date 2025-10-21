@@ -11,6 +11,8 @@ import 'package:incremental_ai/game/routine/model/routine/variant/collect_scrap_
 import 'package:incremental_ai/game/supply/enum/supply_type.dart';
 import 'package:incremental_ai/game/supply/model/supply_model.dart';
 import 'package:incremental_ai/game/supply/usecase/supply_modify_usecase.dart';
+import 'package:incremental_ai/game/upgrade/action/upgrade_state_action.dart';
+import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_type.dart';
 import 'package:logger/logger.dart';
 
 /// Tutorial quest that tasks the player to increase initial routine and collect some supply.
@@ -37,6 +39,7 @@ class TutorialCollectScrapQuest extends QuestModel {
   void onCompletion() {
     Logger().i("COMPLETED!!!");
     GetIt.I<QuestRepository>().fetch(TutorialCollectScrapAfterQuest.sourceId)!.activate();
+    UpgradeStateAction.instance.unlock(UpgradeType.increaseMultiScrapCapacity);
   }
 
   /// Never fails.

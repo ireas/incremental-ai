@@ -5,6 +5,13 @@ routine:
     collect_scrap:
       name: "Scrapdrones"
       tooltip: "Send drones to collect scrap."
+upgrade:
+  increaseScrapCapacity:
+    name: "Increase Scrap Capacity"
+    tooltip: "Increases Scrap Capacity"
+  increaseMultiScrapCapacity:
+    name: "Increase Multi Scrap Capacity"
+    tooltip: "Increases Scrap Capacity"
 quest:
   tutorial:
     collect_scrap:
