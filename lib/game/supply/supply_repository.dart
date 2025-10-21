@@ -21,13 +21,16 @@ class SupplyRepository extends ModuleRepository {
     }
   }
 
+  @override
+  void validate() {}
+
   /// Fetches a [SupplyModel] that is identified by its [SupplyType].
   /// If no entry is found, returns [NULL].
-  SupplyModel? fetch(SupplyType type) {
+  SupplyModel fetch(SupplyType type) {
     SupplyModel? model = models[type];
     if (model == null) {
       logger.w("No model found for $type");
     }
-    return model;
+    return model!;
   }
 }

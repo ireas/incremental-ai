@@ -18,6 +18,9 @@ class RoutineRepository extends ModuleRepository {
   }
 
   @override
+  void validate() {}
+
+  @override
   void update(double deltaTime) {
     for (RoutineModel model in models.values) {
       model.update(deltaTime);

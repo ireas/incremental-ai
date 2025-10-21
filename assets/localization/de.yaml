@@ -3,8 +3,15 @@ routine:
     name: "Prozessor"
   routine:
     collect_scrap:
-     name: "Schrottdrohnen"
-     tooltip: "Schicke Drohnen los um Schrott zu sammeln."
+      name: "Schrottdrohnen"
+      tooltip: "Schicke Drohnen los um Schrott zu sammeln."
+upgrade:
+  increaseScrapCapacity:
+    name: "Schrott Kapazität"
+    tooltip: "Erhöht Schrott Kapazität"
+  increaseMultiScrapCapacity:
+    name: "Multu Schrott Kapazität"
+    tooltip: "Erhöht Schrott Kapazität"
 quest:
   tutorial:
     collect_scrap:
