@@ -12,7 +12,7 @@ class ProcessorDisplay extends WatchingWidget {
   @override
   Widget build(BuildContext context) {
     // fetch current processor model
-    ProcessorModel processor = watch<ProcessorModel>(GetIt.I<RoutineRepository>().processorModel);
+    ProcessorModel processor = watch<ProcessorModel>(RoutineRepository.instance.processorModel);
     String nameLabel = GetIt.I<LocalizationTranslateUsecase>().translate("routine.processor.name");
 
     return Text("$nameLabel: ${processor.value}/${processor.capacity}");

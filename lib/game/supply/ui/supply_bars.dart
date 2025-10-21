@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:incremental_ai/game/supply/enum/supply_type.dart';
-import 'package:incremental_ai/game/supply/model/supply_model.dart';
+import 'package:incremental_ai/game/supply/model/supply/supply_state.dart';
 import 'package:incremental_ai/game/supply/supply_repository.dart';
 import 'package:incremental_ai/game/supply/ui/supply_bar.dart';
+import 'package:watch_it/watch_it.dart';
 
-class SupplyBars extends StatelessWidget {
+/// Vertical list that displays all currently unlocked supplies.
+class SupplyBars extends WatchingWidget {
+  /// Set of all states that should be visible in the UI.
+  static const Set<SupplyState> visibleStates = {SupplyState.unlocked};
+
+  /// Constructor.
   const SupplyBars({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Map<SupplyType, SupplyModel> models = GetIt.I<SupplyRepository>().models;
+    // watch the repository
+    SupplyRepository repository = watch<SupplyRepository>(SupplyRepository.instance);
 
-    return Column(spacing: 5, children: models.values.map((model) => SupplyBar(model: model)).toList());
+    // vertical list of each visible upgrade button
+    return Column(
+      children: repository
+          .fetchAll()
+          .where((e) => visibleStates.contains(e.state))
+          .map((e) => SupplyBar(type: e.type))
+          .toList(),
+    );
   }
 }

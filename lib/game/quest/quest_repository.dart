@@ -1,36 +1,49 @@
+import 'package:get_it/get_it.dart';
 import 'package:incremental_ai/engine/module/module_repository.dart';
-import 'package:incremental_ai/game/quest/model/quest/quest_model.dart';
+import 'package:incremental_ai/game/quest/model/quest/base/quest_model.dart';
+import 'package:incremental_ai/game/quest/model/quest/quest_type.dart';
 import 'package:incremental_ai/game/quest/model/quest/variants/tutorial_after_collect_scrap_quest.dart';
 import 'package:incremental_ai/game/quest/model/quest/variants/tutorial_collect_scrap_quest.dart';
 
 /// Repository for the quest module.
 class QuestRepository extends ModuleRepository {
-  // models
-  final Map<String, QuestModel> models = {};
+  /// Singleton served via [GetIt].
+  static QuestRepository get instance => GetIt.I<QuestRepository>();
+
+  /// All models mapped by their type.
+  final Map<QuestType, QuestModel> _models = {};
 
   @override
   Future<void> initializeModels() async {
-    models[TutorialCollectScrapQuest.sourceId] = TutorialCollectScrapQuest();
-    models[TutorialCollectScrapAfterQuest.sourceId] = TutorialCollectScrapAfterQuest();
+    _models[QuestType.tutorialOne] = TutorialCollectScrapQuest();
+    _models[QuestType.tutorialTwo] = TutorialCollectScrapAfterQuest();
+  }
+
+  @override
+  void validate() {
+    for (QuestType type in QuestType.values) {
+      if (!_models.containsKey(type)) {
+        logger.e("No model defined for $type");
+      }
+    }
   }
 
   @override
   void update(double deltaTime) {
-    for (QuestModel model in models.values) {
+    for (QuestModel model in _models.values) {
       model.update(deltaTime);
     }
+    notifyListeners();
   }
 
-  @override
-  void validate() {}
+  /// Fetches the model corresponding to [type] from [_models].
+  /// If no model is defined for type, throws [StateError].
+  QuestModel fetch(QuestType type) {
+    return _models[type] ?? (throw StateError('No model found for $type'));
+  }
 
-  /// Fetches a [QuestModel] that is identified by its [id].
-  /// If no entry is found, returns [NULL].
-  QuestModel? fetch(String id) {
-    QuestModel? model = models[id];
-    if (model == null) {
-      logger.w("No model found for $id");
-    }
-    return model;
+  /// Fetches all models in [_models] map and returns them as list.
+  List<QuestModel> fetchAll() {
+    return _models.values.toList();
   }
 }

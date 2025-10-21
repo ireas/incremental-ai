@@ -3,16 +3,15 @@ import 'package:incremental_ai/engine/module/assembly.dart';
 import 'package:incremental_ai/engine/module/module_assembler.dart';
 import 'package:incremental_ai/game/quest/quest_repository.dart';
 
-/// Assembler for the quest module.
+/// Assembler for the Quest module.
 class QuestAssembler extends ModuleAssembler {
   @override
   Future<void> assemble(Assembly assembler) async {
     // repository
     QuestRepository repository = QuestRepository();
     await repository.initializeModels();
+    repository.validate();
     GetIt.I.registerSingleton<QuestRepository>(repository);
     assembler.registry.add(repository);
-
-    // usecases
   }
 }

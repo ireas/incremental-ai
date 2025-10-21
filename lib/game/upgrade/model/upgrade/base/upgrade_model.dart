@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:incremental_ai/game/supply/action/supply_value_actions.dart';
+import 'package:incremental_ai/game/supply/action/supply_amount_actions.dart';
 import 'package:incremental_ai/game/supply/component/supply_amount_tuple.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_state.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_type.dart';
@@ -66,7 +66,7 @@ abstract class UpgradeModel extends ChangeNotifier {
     // check if all supply costs can be paid
     for (SupplyAmountTuple cost in fetchCurrentSupplyCosts()) {
       // if any supplies are not sufficient, upgrade not purchasable
-      if (!SupplyValueActions.instance.hasSufficient(cost)) {
+      if (!SupplyAmountActions.instance.hasSufficient(cost)) {
         _state = UpgradeState.unlockedButNotPurchasable;
         return;
       }
@@ -79,7 +79,7 @@ abstract class UpgradeModel extends ChangeNotifier {
   /// Pays the current supply costs of upgrade, should be called when this upgrade is purchased.
   void _paySupplyCosts() {
     for (SupplyAmountTuple cost in fetchCurrentSupplyCosts()) {
-      SupplyValueActions.instance.subtractAmount(cost);
+      SupplyAmountActions.instance.subtract(cost);
     }
   }
 

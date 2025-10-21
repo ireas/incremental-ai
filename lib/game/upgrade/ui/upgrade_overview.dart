@@ -6,7 +6,7 @@ import 'package:watch_it/watch_it.dart';
 
 /// Vertical list that displays all currently unlocked (and not purchased) upgrades.
 class UpgradeOverview extends WatchingWidget {
-  /// Set of all [UpgradeState] that should be visible in the UI.
+  /// Set of all states that should be visible in the UI.
   static const Set<UpgradeState> visibleStates = {
     UpgradeState.unlockedButNotPurchasable,
     UpgradeState.unlockedAndPurchasable,
@@ -17,7 +17,7 @@ class UpgradeOverview extends WatchingWidget {
 
   @override
   Widget build(BuildContext context) {
-    // watch the upgrade repository
+    // watch the repository
     UpgradeRepository repository = watch<UpgradeRepository>(UpgradeRepository.instance);
 
     // vertical list of each visible upgrade button

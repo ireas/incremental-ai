@@ -3,10 +3,10 @@ import 'package:get_it/get_it.dart';
 import 'package:incremental_ai/engine/localization/localization_assembler.dart';
 import 'package:incremental_ai/engine/module/assembly.dart';
 import 'package:incremental_ai/example/example_scene.dart';
-import 'package:incremental_ai/game/quest/model/quest/variants/tutorial_collect_scrap_quest.dart';
+import 'package:incremental_ai/game/quest/model/quest/quest_type.dart';
 import 'package:incremental_ai/game/quest/quest_repository.dart';
 import 'package:incremental_ai/game/routine/action/routine_processor_actions.dart';
-import 'package:incremental_ai/game/upgrade/action/upgrade_state_action.dart';
+import 'package:incremental_ai/game/upgrade/action/upgrade_state_actions.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_type.dart';
 import 'package:logger/logger.dart';
 
@@ -23,9 +23,9 @@ Future<void> main() async {
   await Assembly().assemble();
 
   // TODO: MOVE THIS TO A SEPARATE FILE FOR INITIAL GAME STARTS WITHOUT LOADING GAME SAVE
-  GetIt.I<QuestRepository>().fetch(TutorialCollectScrapQuest.sourceId)?.activate();
+  GetIt.I<QuestRepository>().fetch(QuestType.tutorialOne).activate();
   RoutineProcessorActions.instance.addProcessorCapacity(2);
-  UpgradeStateAction.instance.unlock(UpgradeType.increaseScrapCapacity);
+  UpgradeStateActions.instance.unlock(UpgradeType.increaseScrapCapacity);
 
   runApp(MyApp());
 }

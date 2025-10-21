@@ -1,17 +1,12 @@
-import 'package:get_it/get_it.dart';
-import 'package:incremental_ai/game/routine/model/enum/routine_state.dart';
-import 'package:incremental_ai/game/routine/model/routine/routine_model.dart';
-import 'package:incremental_ai/game/supply/enum/supply_type.dart';
-import 'package:incremental_ai/game/supply/usecase/supply_modify_usecase.dart';
+import 'package:incremental_ai/game/routine/model/routine/base/routine_model.dart';
+import 'package:incremental_ai/game/routine/model/routine/routine_state.dart';
+import 'package:incremental_ai/game/routine/model/routine/routine_type.dart';
+import 'package:incremental_ai/game/supply/action/supply_amount_actions.dart';
+import 'package:incremental_ai/game/supply/component/supply_amount_tuple.dart';
+import 'package:incremental_ai/game/supply/model/supply/supply_type.dart';
 
 /// Initial routine that collects scrap supply in regular intervals.
 class CollectScrapRoutine extends RoutineModel {
-  /// Source model id;
-  static const String sourceId = "routine.collect_scrap";
-
-  /// Source processing costs.
-  static const int sourceProcessingCost = 1;
-
   /// Time in seconds that it takes to complete one routine interval.
   static const double _thresholdTime = 4;
 
@@ -22,7 +17,7 @@ class CollectScrapRoutine extends RoutineModel {
   double progress = 0;
 
   /// Constructor.
-  CollectScrapRoutine({super.id = sourceId, super.processingCost = sourceProcessingCost});
+  CollectScrapRoutine({super.type = RoutineType.scrapDrones, super.processingCost = 1});
 
   @override
   void update(double deltaTime) {
@@ -30,7 +25,7 @@ class CollectScrapRoutine extends RoutineModel {
       _currentTime += deltaTime;
       if (_currentTime >= _thresholdTime) {
         _currentTime -= _thresholdTime;
-        GetIt.I<SupplyModifyUsecase>().increaseValue(SupplyType.scrap, 0.1 * level);
+        SupplyAmountActions.instance.add(SupplyAmountTuple(type: SupplyType.scrap, amount: 0.1 * level));
       }
       progress = (_currentTime / _thresholdTime).clamp(0, 1);
     }
