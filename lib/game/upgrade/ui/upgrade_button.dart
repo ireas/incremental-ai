@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:incremental_ai/engine/ui/widget/multi_click_button.dart';
+import 'package:incremental_ai/engine/ui/button/multi_click_button.dart';
 import 'package:incremental_ai/game/upgrade/action/upgrade_label_actions.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/base/upgrade_model.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_state.dart';
