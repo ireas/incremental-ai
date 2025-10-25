@@ -24,6 +24,8 @@ dependencies:
   get_it: ^8.2.0
   watch_it: ^1.7.0
 
+  # Fullscreen
+  flutter_fullscreen: ^1.2.0
 
 dev_dependencies:
   # Flutter
@@ -41,5 +43,5 @@ flutter:
 
   # Load additional assets
   assets:
-    - assets/localization/de.yaml
-    - assets/localization/en.yaml
+    - assets/localization/
+    - assets/background/

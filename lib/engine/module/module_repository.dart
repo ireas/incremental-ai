@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:logger/logger.dart';
 
 /// Abstract repository base class that should be extended by each modules repository.
-/// TODO: consider making this class a generic, to save boilerplate code
 abstract class ModuleRepository extends ChangeNotifier {
   /// Logger provided to all.
   final Logger logger = Logger();

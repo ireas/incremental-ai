@@ -31,6 +31,7 @@ class TutorialCollectScrapQuest extends QuestModel {
   void onActivation() {
     SupplyStateActions.instance.unlock(SupplyType.scrap);
     RoutineStateActions.instance.unlock(RoutineType.scrapDrones);
+    UpgradeStateActions.instance.unlock(UpgradeType.increaseScrapCapacity);
   }
 
   /// Trigger next quest.
