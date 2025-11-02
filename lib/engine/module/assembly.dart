@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:incremental_ai/engine/cycle/clock/clock.dart';
 import 'package:incremental_ai/engine/cycle/preload/cycle_preloader.dart';
 import 'package:incremental_ai/engine/module/module_repository.dart';
+import 'package:incremental_ai/game/notification/notification_assembler.dart';
 import 'package:incremental_ai/game/quest/quest_assembler.dart';
 import 'package:incremental_ai/game/routine/routine_assembler.dart';
 import 'package:incremental_ai/game/supply/supply_assembler.dart';
@@ -33,6 +34,7 @@ class Assembly {
     await RoutineAssembler().assemble(this);
     await QuestAssembler().assemble(this);
     await UpgradeAssembler().assemble(this);
+    await NotificationAssembler().assemble(this);
 
     // execute preloading
     CyclePreloader.instance.preload();

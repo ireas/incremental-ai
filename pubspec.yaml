@@ -27,6 +27,9 @@ dependencies:
   # Fullscreen
   flutter_fullscreen: ^1.2.0
 
+  # Animation
+  flutter_animate: ^4.5.0
+
 dev_dependencies:
   # Flutter
   flutter_test:
