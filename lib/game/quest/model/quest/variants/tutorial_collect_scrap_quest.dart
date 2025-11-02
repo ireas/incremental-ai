@@ -32,6 +32,7 @@ class TutorialCollectScrapQuest extends QuestModel {
   @override
   void onActivation() {
     SupplyStateActions.instance.unlock(SupplyType.scrap);
+    SupplyStateActions.instance.unlock(SupplyType.mana);
     RoutineStateActions.instance.unlock(RoutineType.scrapDrones);
     UpgradeStateActions.instance.unlock(UpgradeType.increaseScrapCapacity);
   }
@@ -42,7 +43,9 @@ class TutorialCollectScrapQuest extends QuestModel {
     Logger().i("COMPLETED!!!");
     GetIt.I<QuestRepository>().fetch(QuestType.tutorialTwo).activate();
     UpgradeStateActions.instance.unlock(UpgradeType.increaseMultiScrapCapacity);
-    NotificationActions.instance.addNotificationToQueue(NotificationModel(title: "Hermann", message: "Heyyyy du, was geht !?"));
+    NotificationActions.instance.addNotificationToQueue(
+      NotificationModel(title: "Hermann", message: "Heyyyy du, was geht !?"),
+    );
     NotificationActions.instance.addNotificationToQueue(NotificationModel(title: "Hermann", message: "Hallo?"));
   }
 

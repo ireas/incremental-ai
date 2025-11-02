@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incremental_ai/engine/ui/panel/section_panel.dart';
 import 'package:incremental_ai/game/supply/model/supply/supply_state.dart';
 import 'package:incremental_ai/game/supply/supply_repository.dart';
 import 'package:incremental_ai/game/supply/ui/supply_bar.dart';
@@ -18,12 +19,26 @@ class SupplyBars extends WatchingWidget {
     SupplyRepository repository = watch<SupplyRepository>(SupplyRepository.instance);
 
     // vertical list of each visible upgrade button
-    return Column(
-      children: repository
-          .fetchAll()
-          .where((e) => visibleStates.contains(e.state))
-          .map((e) => SupplyBar(type: e.type))
-          .toList(),
+    return SectionPanel(
+      connectTop: true,
+      connectBottom: true,
+      connectLeft: true,
+      skipInnerLeft: true,
+      child: Column(
+        spacing: 20,
+        children: [
+          // TODO: make these section headers localized
+          Text("Supplies", style: Theme.of(context).textTheme.headlineSmall),
+          Column(
+            spacing: 4,
+            children: repository
+                .fetchAll()
+                .where((e) => visibleStates.contains(e.state))
+                .map((e) => SupplyBar(type: e.type))
+                .toList(),
+          ),
+        ],
+      ),
     );
   }
 }

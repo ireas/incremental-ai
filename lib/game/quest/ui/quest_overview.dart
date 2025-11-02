@@ -20,12 +20,15 @@ class QuestOverview extends WatchingWidget {
     QuestRepository repository = watch<QuestRepository>(QuestRepository.instance);
 
     // vertical list of each visible upgrade button
-    return Column(
-      children: repository
+    // TODO: properly show one main quest or tagged quest instead of just the "first"
+    return Align(
+      alignment: AlignmentGeometry.topRight,
+      child: repository
           .fetchAll()
           .where((e) => visibleStates.contains(e.state))
           .map((e) => QuestUi(type: e.type))
-          .toList(),
+          .toList()
+          .first,
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
+import 'package:incremental_ai/engine/localization/action/localization_translate_action.dart';
 import 'package:incremental_ai/game/quest/model/objective/objective_model.dart';
 import 'package:incremental_ai/game/quest/model/objective/objective_state.dart';
 import 'package:incremental_ai/game/quest/model/quest/quest_state.dart';
@@ -26,7 +25,7 @@ abstract class QuestModel extends ChangeNotifier {
   /// Automatically builds [labelName] from [id].
   QuestModel({required this.type, required this.objectives}) {
     id = "quest.${type.name}";
-    labelName = GetIt.I<LocalizationTranslateUsecase>().translate("$id.name");
+    labelName = LocalizationTranslateAction.instance.translate("$id.name");
   }
 
   /// Updates the quest [objectives], [state] and notifies listeners.

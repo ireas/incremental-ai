@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:incremental_ai/engine/ui/button/multi_click_button.dart';
+import 'package:incremental_ai/engine/ui/theme/theme_colors.dart';
+import 'package:incremental_ai/engine/ui/theme/theme_sizes.dart';
 import 'package:incremental_ai/game/upgrade/action/upgrade_label_actions.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/base/upgrade_model.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_state.dart';
@@ -27,11 +29,16 @@ class UpgradeButton extends WatchingWidget {
         child: Tooltip(
           message: UpgradeLabelActions.instance.tooltipLabel(type),
           child: Container(
-            color: upgrade.state == UpgradeState.unlockedAndPurchasable ? Colors.lightBlueAccent : Colors.grey,
+            decoration: BoxDecoration(
+              color: upgrade.state == UpgradeState.unlockedAndPurchasable
+                  ? context.colors.highlight
+                  : context.colors.panelMedium,
+              borderRadius: BorderRadius.all(Radius.circular(context.sizes.radius)),
+            ),
             padding: EdgeInsets.all(5),
             child: Row(
               children: [
-                Icon(Icons.question_mark, color: Colors.black87, size: 40),
+                Icon(Icons.question_mark, color: context.colors.text, size: 40),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

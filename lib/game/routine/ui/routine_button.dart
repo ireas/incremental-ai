@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
+import 'package:incremental_ai/engine/localization/action/localization_translate_action.dart';
 import 'package:incremental_ai/engine/ui/button/multi_click_button.dart';
+import 'package:incremental_ai/engine/ui/theme/theme_colors.dart';
+import 'package:incremental_ai/engine/ui/theme/theme_sizes.dart';
 import 'package:incremental_ai/game/routine/action/routine_level_actions.dart';
+import 'package:incremental_ai/game/routine/action/routine_processor_actions.dart';
 import 'package:incremental_ai/game/routine/model/routine/base/routine_model.dart';
 import 'package:incremental_ai/game/routine/model/routine/routine_type.dart';
 import 'package:incremental_ai/game/routine/routine_repository.dart';
@@ -28,10 +31,10 @@ class RoutineButton extends WatchingWidget {
 
     // fetch all strings
     // TODO: make static strings load once in constructor instead of each rebuild since they do not change anyway.
-    String name = GetIt.I<LocalizationTranslateUsecase>().translate("routine.${routine.id}.name");
-    String processorName = GetIt.I<LocalizationTranslateUsecase>().translate("routine.processor.name");
-    String cost = "(${routine.processingCost} $processorName)";
-    String tooltip = GetIt.I<LocalizationTranslateUsecase>().translate("routine.${routine.id}.tooltip");
+    String name = LocalizationTranslateAction.instance.translate("routine.${routine.id}.name");
+    String tooltip = LocalizationTranslateAction.instance.translate("routine.${routine.id}.tooltip");
+    String cost = "(${routine.processingCost}P)";
+    bool affordable = RoutineProcessorActions.instance.sufficient(routine.processingCost);
 
     // create button that listens to left and right clicks and can show a tooltip
     return MultiClickButton(
@@ -43,12 +46,15 @@ class RoutineButton extends WatchingWidget {
         child: Tooltip(
           message: tooltip,
           child: Container(
-            color: Colors.lightBlueAccent,
+            decoration: BoxDecoration(
+              color: affordable ? context.colors.highlight : context.colors.panelMedium,
+              borderRadius: BorderRadius.circular(context.sizes.radius),
+            ),
             padding: EdgeInsets.all(5),
             child: Column(
               children: [
                 Expanded(child: Text(name)),
-                Text("${routine.level}"),
+                Text("Level: ${routine.level}"),
                 Text(cost),
               ],
             ),

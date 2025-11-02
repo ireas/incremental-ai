@@ -1,15 +1,13 @@
 import 'package:get_it/get_it.dart';
+import 'package:incremental_ai/engine/localization/action/localization_placeholder_action.dart';
 import 'package:incremental_ai/engine/localization/localization.dart';
 import 'package:incremental_ai/engine/localization/localization_repository.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_placeholder_usecase.dart';
 import 'package:logger/logger.dart';
 
 /// Usecase for translating technical lookup keys into their localized Strings.
-class LocalizationTranslateUsecase {
+class LocalizationTranslateAction {
+  static LocalizationTranslateAction get instance => GetIt.I<LocalizationTranslateAction>();
   final Logger _logger = Logger();
-  final LocalizationRepository repository;
-
-  LocalizationTranslateUsecase(this.repository);
 
   /// Translates a technical lookup [key] to its currently active language.
   /// If translation lookup fails, returns lookup [key]
@@ -17,7 +15,7 @@ class LocalizationTranslateUsecase {
     _logger.t("Translating $key");
 
     // fetch currently active localization
-    Localization localization = repository.fetchCurrentLocalization();
+    Localization localization = LocalizationRepository.instance.fetchCurrentLocalization();
 
     // get translated string
     String? translation = localization.lookupTable[key];
@@ -46,7 +44,7 @@ class LocalizationTranslateUsecase {
 
     // replace placeholders if there are any
     _logger.t("Refining $raw");
-    String refined = GetIt.I<LocalizationPlaceholderUsecase>().replacePlaceholders(raw, replacements);
+    String refined = GetIt.I<LocalizationPlaceholderAction>().replacePlaceholders(raw, replacements);
 
     // return refined string
     _logger.t("Translated $key to $refined");

@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_placeholder_usecase.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
+import 'package:incremental_ai/engine/localization/action/localization_placeholder_action.dart';
+import 'package:incremental_ai/engine/localization/action/localization_translate_action.dart';
 import 'package:incremental_ai/game/quest/model/objective/objective_model.dart';
 import 'package:incremental_ai/game/routine/action/routine_level_actions.dart';
 import 'package:incremental_ai/game/routine/model/routine/base/routine_model.dart';
@@ -24,7 +24,7 @@ class ReachRoutineLevelObjective extends ObjectiveModel {
   ReachRoutineLevelObjective(this._targetRoutineType, this._targetLevel) {
     RoutineModel routine = GetIt.I<RoutineRepository>().fetch(_targetRoutineType);
     Map<String, String> replacements = {"routine": routine.id, "target_level": _targetLevel.toString()};
-    _rawLabel = GetIt.I<LocalizationTranslateUsecase>().translateAndReplace("$_sourceId.label", replacements);
+    _rawLabel = LocalizationTranslateAction.instance.translateAndReplace("$_sourceId.label", replacements);
   }
 
   /// Completes if [_targetRoutineType] has value of at least [_targetLevel].
@@ -44,6 +44,6 @@ class ReachRoutineLevelObjective extends ObjectiveModel {
   @override
   String buildLabel() {
     Map<String, String> replacements = {"current_level": _currentLevel.toString()};
-    return GetIt.I<LocalizationPlaceholderUsecase>().replacePlaceholders(_rawLabel, replacements);
+    return LocalizationPlaceholderAction.instance.replacePlaceholders(_rawLabel, replacements);
   }
 }

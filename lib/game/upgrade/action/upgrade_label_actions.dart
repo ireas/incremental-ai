@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
+import 'package:incremental_ai/engine/localization/action/localization_translate_action.dart';
 import 'package:incremental_ai/engine/module/module_usecase.dart';
 import 'package:incremental_ai/game/upgrade/model/upgrade/upgrade_type.dart';
 import 'package:incremental_ai/game/upgrade/upgrade_repository.dart';
@@ -12,7 +12,7 @@ class UpgradeLabelActions extends ModuleActions {
   /// Returns the name label for upgrade specified by [type] parameter.
   /// For multi-purchase upgrade, add the current number of purchases to name.
   String nameLabel(UpgradeType type) {
-    String name = GetIt.instance<LocalizationTranslateUsecase>().translate("upgrade.${type.name}.name");
+    String name = LocalizationTranslateAction.instance.translate("upgrade.${type.name}.name");
 
     // add current level for multi-purchase upgrades
     if (UpgradeRepository.instance.fetch(type).maximumNumberOfPurchases > 1) {
@@ -24,7 +24,7 @@ class UpgradeLabelActions extends ModuleActions {
 
   /// Returns the tooltip label for upgrade specified by [type] parameter.
   String tooltipLabel(UpgradeType type) {
-    return GetIt.instance<LocalizationTranslateUsecase>().translate("upgrade.${type.name}.tooltip");
+    return LocalizationTranslateAction.instance.translate("upgrade.${type.name}.tooltip");
   }
 
   /// Returns the costs label for upgrade specified by [type] parameter.
