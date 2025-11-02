@@ -1,3 +1,10 @@
+supply:
+  scrap:
+    name: "Schrott"
+    tooltip: "Schrott Tooltip"
+  mana:
+    name: "Mana"
+    tooltip: "Mana Tooltip"
 routine:
   processor:
     name: "Prozessor"

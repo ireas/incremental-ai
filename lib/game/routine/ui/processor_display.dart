@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
+import 'package:incremental_ai/engine/localization/action/localization_translate_action.dart';
 import 'package:incremental_ai/game/routine/model/processor/processor_model.dart';
 import 'package:incremental_ai/game/routine/routine_repository.dart';
 import 'package:watch_it/watch_it.dart';
@@ -13,7 +13,7 @@ class ProcessorDisplay extends WatchingWidget {
   Widget build(BuildContext context) {
     // fetch current processor model
     ProcessorModel processor = watch<ProcessorModel>(RoutineRepository.instance.processorModel);
-    String nameLabel = GetIt.I<LocalizationTranslateUsecase>().translate("routine.processor.name");
+    String nameLabel = LocalizationTranslateAction.instance.translate("routine.processor.name");
 
     return Text("$nameLabel: ${processor.value}/${processor.capacity}");
   }

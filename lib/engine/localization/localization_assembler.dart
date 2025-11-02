@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:incremental_ai/engine/localization/localization_repository.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_current_language_usecase.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_placeholder_usecase.dart';
-import 'package:incremental_ai/engine/localization/usecase/localization_translate_usecase.dart';
+import 'package:incremental_ai/engine/localization/action/localization_current_language_action.dart';
+import 'package:incremental_ai/engine/localization/action/localization_placeholder_action.dart';
+import 'package:incremental_ai/engine/localization/action/localization_translate_action.dart';
 import 'package:logger/logger.dart';
 
 /// Assembler for the localization framework. Injects repository and usecases into GetIt.
@@ -19,9 +19,9 @@ class LocalizationAssembler {
     GetIt.I.registerSingleton<LocalizationRepository>(repository);
 
     // assemble and register usecases
-    GetIt.I.registerSingleton<LocalizationCurrentLanguageUsecase>(LocalizationCurrentLanguageUsecase(repository));
-    GetIt.I.registerSingleton<LocalizationTranslateUsecase>(LocalizationTranslateUsecase(repository));
-    GetIt.I.registerSingleton<LocalizationPlaceholderUsecase>(LocalizationPlaceholderUsecase(repository));
+    GetIt.I.registerSingleton<LocalizationCurrentLanguageAction>(LocalizationCurrentLanguageAction());
+    GetIt.I.registerSingleton<LocalizationTranslateAction>(LocalizationTranslateAction());
+    GetIt.I.registerSingleton<LocalizationPlaceholderAction>(LocalizationPlaceholderAction());
 
     // validate after assembly
     repository.validate();

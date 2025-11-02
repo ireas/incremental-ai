@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:incremental_ai/engine/ui/button/multi_click_button.dart';
 import 'package:incremental_ai/engine/ui/effect/shimmer_border.dart';
 import 'package:incremental_ai/engine/ui/theme/theme_colors.dart';
+import 'package:incremental_ai/engine/ui/theme/theme_sizes.dart';
 import 'package:incremental_ai/game/notification/action/notification_actions.dart';
 import 'package:incremental_ai/game/notification/model/notification/notification_model.dart';
 
@@ -48,17 +49,20 @@ class _NotificationPanel extends State<NotificationPanel> {
           // visual glow effect for unread notifications
           child: ShimmerBorder(
             enabled: !_isHoveredOnce,
-            colorShimmer: Colors.teal,
+            colorShimmer: context.colors.highlight,
             child: Container(
-              decoration: BoxDecoration(color: ThemeColors.backgroundPanel, borderRadius: BorderRadius.circular(4)),
-              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: context.colors.panelMedium,
+                borderRadius: BorderRadius.circular(context.sizes.radius),
+              ),
+              padding: const EdgeInsets.all(10),
 
               // actual notification content
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 spacing: 10,
                 children: [
-                  Icon(Icons.notifications, color: ThemeColors.text, size: 20),
+                  Icon(Icons.notifications, color: context.colors.text, size: 20),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -66,7 +70,7 @@ class _NotificationPanel extends State<NotificationPanel> {
                     children: [
                       Text(
                         widget.notification.title,
-                        style: TextStyle(fontWeight: FontWeight.bold, color: ThemeColors.text),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: context.colors.text),
                       ),
                       Text(widget.notification.message),
                     ],

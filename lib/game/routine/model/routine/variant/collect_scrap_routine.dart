@@ -26,6 +26,7 @@ class CollectScrapRoutine extends RoutineModel {
       if (_currentTime >= _thresholdTime) {
         _currentTime -= _thresholdTime;
         SupplyAmountActions.instance.add(SupplyAmountTuple(type: SupplyType.scrap, amount: 0.1 * level));
+        SupplyAmountActions.instance.add(SupplyAmountTuple(type: SupplyType.mana, amount: 0.05 * level));
       }
       progress = (_currentTime / _thresholdTime).clamp(0, 1);
     }

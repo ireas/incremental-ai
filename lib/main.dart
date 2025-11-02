@@ -17,12 +17,12 @@ Future<void> main() async {
   await FullScreen.ensureInitialized();
   FullScreen.setFullScreen(false);
 
-  // TODO: MOVE THIS TO SEPARATE FILE
+  // TODO: move this to a separate file
   // prepare localization
   LocalizationAssembler localizationAssembler = LocalizationAssembler();
   await localizationAssembler.assemble();
 
-  // TODO: MOVE THIS TO SEPARATE FILE
+  // TODO: move this to a separate file
   // assemble game
   await Assembly().assemble();
 

@@ -1,13 +1,11 @@
-import 'package:incremental_ai/engine/localization/localization_repository.dart';
+import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
 /// Usecase for replacing placeholders in localized strings.
-class LocalizationPlaceholderUsecase {
+class LocalizationPlaceholderAction {
+  static LocalizationPlaceholderAction get instance => GetIt.I<LocalizationPlaceholderAction>();
   static final Logger _logger = Logger();
   static final RegExp _placeholderRegex = RegExp(r'{.*?}');
-  final LocalizationRepository repository;
-
-  LocalizationPlaceholderUsecase(this.repository);
 
   /// Replaces the placeholders in [raw] String by injecting the [replacements].
   /// The placeholders in [raw] must match the keys in [replacements] and must be contained in curly brackets.
