@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:incremental_ai/game/notification/action/notification_actions.dart';
+import 'package:incremental_ai/game/notification/model/notification/notification_model.dart';
 import 'package:incremental_ai/game/quest/model/objective/variants/collect_supply_objective.dart';
 import 'package:incremental_ai/game/quest/model/objective/variants/reach_routine_level_objective.dart';
 import 'package:incremental_ai/game/quest/model/quest/base/quest_model.dart';
@@ -22,7 +24,7 @@ class TutorialCollectScrapQuest extends QuestModel {
         type: QuestType.tutorialOne,
         objectives: {
           ReachRoutineLevelObjective(RoutineType.scrapDrones, 1),
-          CollectSupplyObjective(SupplyType.scrap, 1.0),
+          CollectSupplyObjective(SupplyType.scrap, 0.4),
         },
       );
 
@@ -40,6 +42,8 @@ class TutorialCollectScrapQuest extends QuestModel {
     Logger().i("COMPLETED!!!");
     GetIt.I<QuestRepository>().fetch(QuestType.tutorialTwo).activate();
     UpgradeStateActions.instance.unlock(UpgradeType.increaseMultiScrapCapacity);
+    NotificationActions.instance.addNotificationToQueue(NotificationModel(title: "Hermann", message: "Heyyyy du, was geht !?"));
+    NotificationActions.instance.addNotificationToQueue(NotificationModel(title: "Hermann", message: "Hallo?"));
   }
 
   /// Never fails.

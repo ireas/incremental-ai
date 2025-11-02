@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:incremental_ai/engine/ui/layout/layout.dart';
+import 'package:incremental_ai/game/notification/ui/notification_overview.dart';
 import 'package:incremental_ai/game/quest/ui/quest_overview.dart';
 import 'package:incremental_ai/game/routine/ui/processor_display.dart';
 import 'package:incremental_ai/game/routine/ui/routine_buttons.dart';
@@ -16,7 +17,7 @@ class GameScene extends StatelessWidget {
       mainLeftChild: SupplyBars(),
       mainCenterChild: Column(children: [RoutineButtons(), ProcessorDisplay()]),
       mainRightChild: UpgradeOverview(),
-      footerChild: Container(),
+      footerChild: NotificationOverview(),
     );
   }
 }

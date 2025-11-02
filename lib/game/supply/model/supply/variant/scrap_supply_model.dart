@@ -4,5 +4,5 @@ import 'package:incremental_ai/game/supply/model/supply/supply_type.dart';
 
 /// Scrap supply.
 class ScrapSupplyModel extends SupplyModel {
-  ScrapSupplyModel({super.type = SupplyType.scrap, super.color = Colors.amberAccent});
+  ScrapSupplyModel({super.type = SupplyType.scrap, super.color = const Color.fromARGB(255, 118, 101, 34)});
 }

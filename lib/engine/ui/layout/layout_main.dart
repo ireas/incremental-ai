@@ -29,18 +29,9 @@ class LayoutMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          flex: flexLeft,
-          child: Container(child: leftChild),
-        ),
-        Expanded(
-          flex: flexCenter,
-          child: Container(child: centerChild),
-        ),
-        Expanded(
-          flex: flexRight,
-          child: Container(child: rightChild),
-        ),
+        Expanded(flex: flexLeft, child: leftChild),
+        Expanded(flex: flexCenter, child: centerChild),
+        Expanded(flex: flexRight, child: rightChild),
       ],
     );
   }
