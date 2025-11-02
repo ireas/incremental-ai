@@ -32,6 +32,9 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+## build folder
+/windows/
+
 
 # Symbolication related
 app.*.symbols
