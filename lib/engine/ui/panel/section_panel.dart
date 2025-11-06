@@ -5,7 +5,7 @@ import 'package:incremental_ai/engine/ui/theme/theme_sizes.dart';
 /// General panel that wraps a section.
 class SectionPanel extends StatelessWidget {
   /// Child that is displayed in panel.
-  final Widget child;
+  final Widget? child;
 
   // determine which edges have no separation or border
   final bool connectTop;

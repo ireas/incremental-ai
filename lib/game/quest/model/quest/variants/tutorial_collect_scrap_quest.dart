@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:incremental_ai/engine/cutscene/action/cutscene_create_action.dart';
+import 'package:incremental_ai/engine/cutscene/model/cutscene/cutscene_model.dart';
 import 'package:incremental_ai/game/notification/action/notification_actions.dart';
 import 'package:incremental_ai/game/notification/model/notification/notification_model.dart';
 import 'package:incremental_ai/game/quest/model/objective/variants/collect_supply_objective.dart';
@@ -40,13 +42,27 @@ class TutorialCollectScrapQuest extends QuestModel {
   /// Trigger next quest.
   @override
   void onCompletion() {
+    // log
     Logger().i("COMPLETED!!!");
+
+    // activate next quest
     GetIt.I<QuestRepository>().fetch(QuestType.tutorialTwo).activate();
+
+    // unlock uporade
     UpgradeStateActions.instance.unlock(UpgradeType.increaseMultiScrapCapacity);
+
+    // display notification
     NotificationActions.instance.addNotificationToQueue(
       NotificationModel(title: "Hermann", message: "Heyyyy du, was geht !?"),
     );
     NotificationActions.instance.addNotificationToQueue(NotificationModel(title: "Hermann", message: "Hallo?"));
+
+    // display cutscene
+    CutsceneModel cutscene = CutsceneModel(messages: ["AA", "BBB"], background: "before.png");
+    CutsceneCreateAction.instance.create(cutscene);
+
+    CutsceneModel cutscene2 = CutsceneModel(messages: ["CCC", "DDD"], background: "after.png");
+    CutsceneCreateAction.instance.create(cutscene2);
   }
 
   /// Never fails.

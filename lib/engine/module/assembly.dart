@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:incremental_ai/engine/cutscene/cutscene_assembler.dart';
 import 'package:incremental_ai/engine/cycle/clock/clock.dart';
 import 'package:incremental_ai/engine/cycle/preload/cycle_preloader.dart';
 import 'package:incremental_ai/engine/module/module_repository.dart';
@@ -29,12 +30,13 @@ class Assembly {
     // provide a preloader
     GetIt.instance.registerSingleton<CyclePreloader>(CyclePreloader());
 
-    // assemble all game modules
+    // assemble all modules
     await SupplyAssembler().assemble(this);
     await RoutineAssembler().assemble(this);
     await QuestAssembler().assemble(this);
     await UpgradeAssembler().assemble(this);
     await NotificationAssembler().assemble(this);
+    await CutsceneAssembler().assemble(this);
 
     // execute preloading
     CyclePreloader.instance.preload();
