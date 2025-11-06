@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incremental_ai/engine/cutscene/ui/cutscene_overview.dart';
 import 'package:incremental_ai/engine/ui/layout/layout_footer.dart';
 import 'package:incremental_ai/engine/ui/layout/layout_header.dart';
 import 'package:incremental_ai/engine/ui/layout/layout_main.dart';
@@ -94,6 +95,9 @@ class BaseLayout extends StatelessWidget {
               ),
             ],
           ),
+
+          // overlay for cutscenes
+          CutsceneOverview(),
         ],
       ),
     );

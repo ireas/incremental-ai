@@ -6,6 +6,7 @@ The **Quest** module provides challenges that the player needs to achieve and th
 > Additional Ideas...
 > - add timed quests for more urgency.
 > - add quest line models for easier handling of multiple interconnected quests
+> - change to module based quest lines
 > - improve visual layout and add broad and detailed view for quests
 > - add objective to purchase upgrades
 
