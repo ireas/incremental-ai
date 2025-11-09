@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:incremental_ai/engine/translator/translator.dart';
+import 'package:incremental_ai/engine/widget/button/multi_click_button.dart';
+import 'package:incremental_ai/engine/widget/theme/theme_colors.dart';
+import 'package:incremental_ai/engine/widget/theme/theme_sizes.dart';
+import 'package:incremental_ai/module/routine/action/routine_level_actions.dart';
+import 'package:incremental_ai/module/routine/action/routine_processor_actions.dart';
+import 'package:incremental_ai/module/routine/model/routine/base/routine_model.dart';
+import 'package:incremental_ai/module/routine/model/routine/routine_type.dart';
+import 'package:incremental_ai/module/routine/routine_repository.dart';
+import 'package:watch_it/watch_it.dart';
+
+/// UI widget for displaying a single routine in UI.
+/// The widget is a button that allows increasing and decreasing activation levels via left and right clicks.
+/// It displays the following information
+/// - name
+/// - description (on hover)
+/// - current activation level
+/// - processing cost per activation
+class RoutineButton extends WatchingWidget {
+  /// Source routine model.
+  final RoutineType type;
+
+  /// Constructor.
+  const RoutineButton({super.key, required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    // watch model
+    RoutineModel routine = watch<RoutineModel>(RoutineRepository.instance.fetch(type));
+
+    // fetch all strings
+    // TODO: make static strings load once in constructor instead of each rebuild since they do not change anyway.
+    String name = Translator.instance.translate("routine.${routine.id}.name");
+    String tooltip = Translator.instance.translate("routine.${routine.id}.tooltip");
+    String cost = "(${routine.processingCost}P)";
+    bool affordable = RoutineProcessorActions.instance.sufficient(routine.processingCost);
+
+    // create button that listens to left and right clicks and can show a tooltip
+    return MultiClickButton(
+      onLeftClick: () => GetIt.I<RoutineLevelActions>().increment(type),
+      onRightClick: () => GetIt.I<RoutineLevelActions>().decrement(type),
+      child: SizedBox(
+        height: 100,
+        width: 100,
+        child: Tooltip(
+          message: tooltip,
+          child: Container(
+            decoration: BoxDecoration(
+              color: affordable ? context.colors.highlight : context.colors.panelMedium,
+              borderRadius: BorderRadius.circular(context.sizes.radius),
+            ),
+            padding: EdgeInsets.all(5),
+            child: Column(
+              children: [
+                Expanded(child: Text(name)),
+                Text("Level: ${routine.level}"),
+                Text(cost),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
