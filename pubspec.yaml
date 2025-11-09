@@ -46,5 +46,5 @@ flutter:
 
   # Load additional assets
   assets:
-    - assets/localization/
+    - assets/translation/
     - assets/background/
